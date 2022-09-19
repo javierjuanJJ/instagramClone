@@ -1,48 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:instagram_clone/screens/signup_screen.dart';
-import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/widgets/text_field.dart';
 
-import '../responsive/mobile_screen_layout.dart';
-import '../responsive/responsive_layout.dart';
-import '../responsive/web_screen_layout.dart';
+import '../utils/colors.dart';
+import 'login_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isLoading = false;
 
-  // void loginUser() async {
+  // void signUpUser() async {
   //   setState(() {
   //     _isLoading = true;
   //   });
-  //   String res = await AuthMethods().loginUser(
-  //       email: _emailController.text, password: _passwordController.text);
-  //   if (res == 'success') {
-  //     Navigator.of(context).pushAndRemoveUntil(
-  //         MaterialPageRoute(
-  //           builder: (context) => const ResponsiveLayout(
-  //             mobileScreenLayout: MobileScreenLayout(),
-  //             webScreenLayout: WebScreenLayout(),
-  //           ),
-  //         ),
-  //             (route) => false);
-  //
+  //   String res = await AuthMethods().signUpUser(
+  //     email: _emailController.text,
+  //     password: _passwordController.text,
+  //     username: _usernameController.text,
+  //   );
+  //   if (res == "success") {
   //     setState(() {
   //       _isLoading = false;
   //     });
+  //     // navigate to the home screen
+  //     Navigator.of(context).pushReplacement(
+  //       MaterialPageRoute(
+  //         builder: (context) => const ResponsiveLayout(
+  //           mobileScreenLayout: MobileScreenLayout(),
+  //           webScreenLayout: WebScreenLayout(),
+  //         ),
+  //       ),
+  //     );
   //   } else {
   //     setState(() {
   //       _isLoading = false;
   //     });
+  //     // show the error
   //     ScaffoldMessenger.of(context).showSnackBar(
   //       SnackBar(
   //         content: Text(res),
@@ -61,13 +62,24 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              child: Image.asset(
+              child:
+              Image.asset(
                 'assets/ic_instagram.png',
                 color: primaryColor,
                 height: 64,
               ),
             ),
             const SizedBox(height: 5),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              width: 370,
+              height: 50,
+              child: TextFieldInput(
+                hintText: 'Enter Username',
+                textEditingController: _usernameController,
+                textInputType: TextInputType.text,
+              ),
+            ),
             Container(
               margin: const EdgeInsets.only(top: 10),
               width: 370,
@@ -92,18 +104,18 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-
+                //signUpUser
               },
               child: !_isLoading
                   ? const Text(
-                'Log In',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              )
+                      'Log In',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    )
                   : const Center(
-                child: CircularProgressIndicator(),
-              ),
+                      child: CircularProgressIndicator(),
+                    ),
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(blueColor),
                 minimumSize: MaterialStateProperty.all(
@@ -118,15 +130,15 @@ class _LoginScreenState extends State<LoginScreen> {
             GestureDetector(
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const SignupScreen(),
+                  builder: (context) => const LoginScreen(),
                 ),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  Text("Don't have an account?"),
+                  Text("Already have an account?"),
                   Text(
-                    " Sign up.",
+                    " Login.",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
