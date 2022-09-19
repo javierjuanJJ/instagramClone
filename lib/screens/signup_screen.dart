@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/widgets/text_field.dart';
 
 import '../utils/colors.dart';
@@ -15,6 +16,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _bioController = TextEditingController();
   bool _isLoading = false;
 
   // void signUpUser() async {
@@ -62,12 +64,31 @@ class _SignupScreenState extends State<SignupScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              child:
-              Image.asset(
-                'assets/ic_instagram.png',
-                color: primaryColor,
-                height: 64,
+              child: Image(
+                image: const AssetImage('assets/ic_instagram.png'),
               ),
+              // Image.asset(
+              //   'assets/ic_instagram.png',
+              //   color: primaryColor,
+              //   height: 64,
+              // ),
+            ),
+            Stack(
+              children: [
+                const CircleAvatar(
+                  radius: 64,
+                  backgroundImage: NetworkImage(
+                      'https://concepto.de/wp-content/uploads/2015/03/paisaje-800x409.jpg'),
+                ),
+                Positioned(
+                  bottom: -10,
+                  left: 80,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.add_a_photo),
+                  ),
+                )
+              ],
             ),
             const SizedBox(height: 5),
             Container(
@@ -102,13 +123,29 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             const SizedBox(height: 10),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              height: 50,
+              width: 370,
+              child: TextFieldInput(
+                hintText: 'Enter Bio',
+                textEditingController: _bioController,
+                textInputType: TextInputType.text,
+                isPass: true,
+              ),
+            ),
+            const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {
-                //signUpUser
+              onPressed: () async {
+                AuthMethods().signUpUser(
+                    username: _usernameController.text,
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                    bio: _bioController.text);
               },
               child: !_isLoading
                   ? const Text(
-                      'Log In',
+                      'Sign up',
                       style: TextStyle(
                         fontSize: 16,
                       ),
