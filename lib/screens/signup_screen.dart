@@ -145,7 +145,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 hintText: 'Enter Bio',
                 textEditingController: _bioController,
                 textInputType: TextInputType.text,
-                isPass: true,
+                isPass: false,
               ),
             ),
             const SizedBox(height: 10),
