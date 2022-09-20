@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/utils/global_variables.dart';
 
 import '../utils/colors.dart';
 
@@ -32,13 +33,8 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        children: [
-          Text('a'),
-          Text('b'),
-          Text('c'),
-          Text('d'),
-          Text('e'),
-        ],
+        children: homeScreens,
+        physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
         onPageChanged: onPageChanged,
       ),
