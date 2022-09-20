@@ -211,7 +211,7 @@ class _SignupScreenState extends State<SignupScreen> {
         bio: _bioController.text,
         file: _image!);
     // if string returned is sucess, user has been created
-    if (res == "success") {
+    if (res == "Correct") {
       setState(() {
         _isLoading = false;
       });
