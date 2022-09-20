@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/resources/auth_methods.dart';
+import 'package:instagram_clone/screens/home_screen.dart';
 import 'package:instagram_clone/screens/signup_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/utils.dart';
@@ -143,6 +144,11 @@ class _LoginScreenState extends State<LoginScreen> {
     String res = await AuthMethods().logInUser(
         email: _emailController.text, password: _passwordController.text);
     if (res == 'Correct') {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) {
+          return const HomeScreen();
+        },
+      ));
     } else {
       showSnackBar(context, res);
     }
