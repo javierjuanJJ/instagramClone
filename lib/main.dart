@@ -52,9 +52,8 @@ class MyApp extends StatelessWidget {
                   );
                 }
               }
-
-              return LoginScreen();
           }
+          return LoginScreen();
         },
       ),
     );

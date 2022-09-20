@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/resources/auth_methods.dart';
-import 'package:instagram_clone/screens/home_screen.dart';
 import 'package:instagram_clone/screens/signup_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/text_field.dart';
+
+import '../responsive/mobile_screen_layout.dart';
+import '../responsive/responsive_layout.dart';
+import '../responsive/web_screen_layout.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -144,11 +147,18 @@ class _LoginScreenState extends State<LoginScreen> {
     String res = await AuthMethods().logInUser(
         email: _emailController.text, password: _passwordController.text);
     if (res == 'Correct') {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) {
-          return const HomeScreen();
-        },
-      ));
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const ResponsiveLayout(
+              mobileScreenLayout: MobileScreenLayout(),
+              webScreenLayout: WebScreenLayout(),
+            ),
+          ),
+          (route) => false);
+
+      setState(() {
+        _isLoading = false;
+      });
     } else {
       showSnackBar(context, res);
     }
