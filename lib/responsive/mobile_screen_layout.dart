@@ -33,7 +33,11 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
     return Scaffold(
       body: PageView(
         children: [
-          Text('')
+          Text('a'),
+          Text('b'),
+          Text('c'),
+          Text('d'),
+          Text('e'),
         ],
         controller: pageController,
         onPageChanged: onPageChanged,
