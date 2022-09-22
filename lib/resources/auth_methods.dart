@@ -94,7 +94,10 @@ class AuthMethods {
     return res;
   }
   Future<void> signOut() async {
-    await _auth.signOut();
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      await FirebaseAuth.instance.signOut();
+    }
   }
 
 }
