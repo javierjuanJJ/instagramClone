@@ -25,7 +25,7 @@ class AuthMethods {
     required String email,
     required String password,
     required String bio,
-    required Uint8List file,
+    required Uint8List photoUrl,
   }) async {
     String res = 'Some error found';
 
@@ -34,12 +34,12 @@ class AuthMethods {
           email.isNotEmpty ||
           password.isNotEmpty ||
           bio.isNotEmpty ||
-          file != null) {
+          photoUrl != null) {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
 
         String photoURL = await StorageMethods()
-            .uploadImageToStorage('profilePics', file, false);
+            .uploadImageToStorage('profilePics', photoUrl, false);
 
         model.User _user = model.User(
           username: username,
@@ -93,4 +93,8 @@ class AuthMethods {
 
     return res;
   }
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
+
 }
